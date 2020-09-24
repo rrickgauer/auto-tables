@@ -20,14 +20,16 @@ function addEventListeners() {
 }
 
 
-// Table sort
-
+////////////////
+// Table sort //
+////////////////
 function tableSort(thClicked) {
   var table       = $(thClicked).closest('.tablesort');
   var columnIndex = getCellIndex(thClicked);
   var rows        = $(table).find('tbody tr');
   var sortType    = $(thClicked).attr('data-tablesort-type');
 
+  // decide which sorting type to perform
   switch (sortType) {
     case SORT_TYPES.INT:
       rows = sortRowsInt(rows, columnIndex);
@@ -41,17 +43,20 @@ function tableSort(thClicked) {
   }
 
   $(table).find('tbody').html(rows);
-
-
 }
 
+///////////////////////////
+// Return the cell index //
+///////////////////////////
 function getCellIndex(th) {
   var index = $(th).closest('table').find('tr').find(th).index();
   return index;
 }
 
+///////////////////////////////
+// Sort rows by string value //
+///////////////////////////////
 function sortRowsString(rows, columnIndex) {
-
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
     var cellsB = $(b).find('td');
@@ -64,6 +69,9 @@ function sortRowsString(rows, columnIndex) {
   return sortedRows;
 }
 
+//////////////////////////
+// Sort rows by integer //
+//////////////////////////
 function sortRowsInt(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
@@ -77,6 +85,9 @@ function sortRowsInt(rows, columnIndex) {
   return sortedRows;
 }
 
+///////////////////////////////
+// Sort rows by date YYYMMDD //
+///////////////////////////////
 function sortRowsDate(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
@@ -93,14 +104,19 @@ function sortRowsDate(rows, columnIndex) {
 
 // Table Search
 
+/////////////////////////////
+// Load all the table text //
+/////////////////////////////
 function loadAllTableText() {
   var tablesearchTables = $('.tablesearch-table');
 
   for (var count = 0; count < tablesearchTables.length; count++) 
-    loadTableText(tablesearchTables[count]);
-  
+    loadTableText(tablesearchTables[count]);  
 }
 
+/////////////////////////
+// Load the table text //
+/////////////////////////
 function loadTableText(table) {
   var cells = $(table).find('tbody td');
 
@@ -111,6 +127,9 @@ function loadTableText(table) {
   }
 }
 
+//////////////////////
+// Search the table //
+//////////////////////
 function tableSearch(input) {
   var text = $(input).val().toUpperCase();
   var table = $(input).attr('data-tablesearch-table');
