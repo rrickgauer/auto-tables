@@ -3,12 +3,11 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-<a href="https://github.com/othneildrew/Best-README-Template">
+<a href="https://www.ryanrickgauer.com/blog/entries.php?entryID=37">
 <img src="resources/logo.png" alt="Logo">
 </a>
 
 <h3 align="center">Auto Tables</h3>
-
 <p align="center">My personal JavaScript library for sorting and searching tables.</p>
 <p align="center"><strong><i><a href="https://www.ryanrickgauer.com/blog/entries.php?entryID=37">View Demo</a></i></strong></p>
 
@@ -63,8 +62,6 @@ Then, after downloading the [auto-tables.js](https://github.com/rrickgauer/auto-
 ```
 
 
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 There are 2 modules that are included in the script: **tablesort** and **tablesearch**.
@@ -93,7 +90,7 @@ As of now, the only accepted `data-tablesort-type` types are:
 * **string** - `data-tablesort-type="string"`
 * **date** - `data-tablesort-type="date"`
 
-Dates require a further step that you can read about in our [docs ADD LINK HERE!!!!!!](#).
+Dates require a further step that you can read about in our [docs](https://www.ryanrickgauer.com/blog/entries.php?entryID=37).
 
 ### Tablesearch
 
@@ -117,11 +114,9 @@ For the text input:
 ```
 
 
-
-<!-- CONTRIBUTING -->
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated** :pray:.
+Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated** :pray:
 
 1. Fork the Project
 2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
