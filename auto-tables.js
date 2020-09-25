@@ -4,15 +4,20 @@ const SORT_TYPES = {
   DATE: "date",
 };
 
+Date.prototype.valid = function() {
+  return isFinite(this);
+}
+
 $(document).ready(function() {
   loadAllTableText(); 
   addEventListeners();
 });
 
 function addEventListeners() {
-  $('.tablesort th').on('click', function() {
+  $('body').on('click', '.tablesort th', function() {
     tableSort(this);
   });
+
 
   $('.tablesearch-input').on('keyup', function() {
     tableSearch(this);
@@ -27,23 +32,78 @@ function tableSort(thClicked) {
   var table       = $(thClicked).closest('.tablesort');
   var columnIndex = getCellIndex(thClicked);
   var rows        = $(table).find('tbody tr');
-  var sortType    = $(thClicked).attr('data-tablesort-type');
+  var sortType;
 
-  // decide which sorting type to perform
-  switch (sortType) {
-    case SORT_TYPES.INT:
-      rows = sortRowsInt(rows, columnIndex);
-      break;
-    case SORT_TYPES.STRING:
-      rows = sortRowsString(rows, columnIndex);
-      break;
-    case SORT_TYPES.DATE:
-    rows = sortRowsDate(rows, columnIndex);
-    break;
+  // if no data type is specified, determine it
+  if ($(thClicked).data('tablesort-type'))
+    sortType = $(thClicked).attr('data-tablesort-type');
+  else
+    sortType = determineType(thClicked);
+
+  // sort rows descending
+  if ($(thClicked).hasClass('tablesort-asc')) {
+    $(table).find('thead th').removeClass('tablesort-asc').removeClass('tablesort-desc');
+    $(thClicked).addClass('tablesort-desc');
+
+    switch (sortType) {
+      case SORT_TYPES.INT:
+        rows = sortRowsIntDesc(rows, columnIndex);
+        break;
+      case SORT_TYPES.DATE:
+        rows = sortRowsDateDesc(rows, columnIndex);
+        break;
+      default:
+        rows = sortRowsStringDesc(rows, columnIndex);
+        break;
+    }
+  } 
+
+  // sort rows ascending
+  else {
+    $(table).find('thead th').removeClass('tablesort-asc').removeClass('tablesort-desc');
+    $(thClicked).addClass('tablesort-asc');
+
+    switch (sortType) {
+      case SORT_TYPES.INT:
+        rows = sortRowsInt(rows, columnIndex);
+        break;
+      case SORT_TYPES.DATE:
+        rows = sortRowsDate(rows, columnIndex);
+        break;
+      default:
+        rows = sortRowsString(rows, columnIndex);
+        break;
+    }
   }
 
   $(table).find('tbody').html(rows);
 }
+
+
+function determineType(thClicked) {
+  var table       = $(thClicked).closest('.tablesort');
+  var columnIndex = getCellIndex(thClicked);
+  var rows        = $(table).find('tbody tr');
+  var isString    = false;
+
+
+  // if there is any string, return string value
+  // otherwise return int value
+  for (var count = 0; count < rows.length; count++) {
+    var cells = $(rows[count]).find('td');
+    var cellValue = $(cells[columnIndex]).text();
+
+    if ($.isNumeric(cellValue) == false)
+      isString = true;
+  }
+
+  if (isString)
+    return SORT_TYPES.STRING;
+  else
+    return SORT_TYPES.INT;
+}
+
+
 
 ///////////////////////////
 // Return the cell index //
@@ -69,6 +129,22 @@ function sortRowsString(rows, columnIndex) {
   return sortedRows;
 }
 
+///////////////////////////////
+// Sort rows by string value //
+///////////////////////////////
+function sortRowsStringDesc(rows, columnIndex) {
+  var sortedRows = rows.sort(function(a, b) {
+    var cellsA = $(a).find('td');
+    var cellsB = $(b).find('td');
+    var textA  = $(cellsA[columnIndex]).text().toUpperCase();
+    var textB  = $(cellsB[columnIndex]).text().toUpperCase();
+
+    return textA > textB ? -1 : 1;
+  });
+
+  return sortedRows;
+}
+
 //////////////////////////
 // Sort rows by integer //
 //////////////////////////
@@ -76,10 +152,26 @@ function sortRowsInt(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
     var cellsB = $(b).find('td');
-    var numA  = parseInt($(cellsA[columnIndex]).text());
-    var numB  = parseInt($(cellsB[columnIndex]).text());
+    var numA  = parseFloat($(cellsA[columnIndex]).text());
+    var numB  = parseFloat($(cellsB[columnIndex]).text());
 
     return numA < numB ? -1 : 1;
+  });
+
+  return sortedRows;
+}
+
+//////////////////////////
+// Sort rows by integer desc //
+//////////////////////////
+function sortRowsIntDesc(rows, columnIndex) {
+  var sortedRows = rows.sort(function(a, b) {
+    var cellsA = $(a).find('td');
+    var cellsB = $(b).find('td');
+    var numA  = parseFloat($(cellsA[columnIndex]).text());
+    var numB  = parseFloat($(cellsB[columnIndex]).text());
+
+    return numA > numB ? -1 : 1;
   });
 
   return sortedRows;
@@ -92,13 +184,35 @@ function sortRowsDate(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
     var cellsB = $(b).find('td');
-    var numA  = parseInt($(cellsA[columnIndex]).attr('data-tablesort-value'));
-    var numB  = parseInt($(cellsB[columnIndex]).attr('data-tablesort-value'));
+    var dateA = new Date($(cellsA[columnIndex]).text());
+    var dateB = new Date($(cellsB[columnIndex]).text());
 
-    return numA < numB ? -1 : 1;
+    return dateA < dateB ? -1 : 1;
   });
 
   return sortedRows;
+}
+
+
+///////////////////////////////
+// Sort rows by date YYYMMDD //
+///////////////////////////////
+function sortRowsDateDesc(rows, columnIndex) {
+  var sortedRows = rows.sort(function(a, b) {
+    var cellsA = $(a).find('td');
+    var cellsB = $(b).find('td');
+    var dateA = new Date($(cellsA[columnIndex]).text());
+    var dateB = new Date($(cellsB[columnIndex]).text());
+
+    return dateA > dateB ? -1 : 1;
+  });
+
+  return sortedRows;
+}
+
+function isValidDate(dateString) {
+  var testDate = new Date(dateString);
+  return testDate.valid();
 }
 
 
