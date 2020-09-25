@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Auto tables</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+
+  <!-- jquery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- popper -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+  <!-- bootstrap -->
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+  <!-- autotables -->
+  <script src="auto-tables.js"></script>
+
+</head>
+<body>
+  <div class="container">
+
+
+    <h1 class="text-center mt-5 mb-5">Auto tables</h1>
+
+    <input type="text" class="form-control mb-3 tablesearch-input" data-tablesearch-table="#data-table"  placeholder="Search">
+
+    <div class="table-responsive">
+
+      <table id="data-table" class="table table-sm tablesearch-table">
+        <thead><tr>
+          <th>Index</th>
+          <th>First name</th>
+          <th>Last name</th>
+          <th>Email</th>
+          <th>Country</th>
+          <th>Dob</th>
+        </tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Dreddy</td><td>Norgate</td><td>dnorgate0@java.com</td><td>Indonesia</td><td>10/04/1982</td></tr>
+          <tr><td>2</td><td>Rodger</td><td>Parkins</td><td>rparkins1@imdb.com</td><td>Brazil</td><td>02/25/1881</td></tr>
+          <tr><td>3</td><td>Udell</td><td>Treeby</td><td>utreeby2@xing.com</td><td>Bolivia</td><td>01/25/1969</td></tr>
+          <tr><td>4</td><td>Marsiella</td><td>Ghelarducci</td><td>mghelarducci3@cpanel.net</td><td>Japan</td><td>10/16/1976</td></tr>
+          <tr><td>5</td><td>Kerwinn</td><td>Dickey</td><td>kdickey4@cornell.edu</td><td>Thailand</td><td>10/04/1982</td></tr>
+          <tr><td>6</td><td>Rani</td><td>Meatyard</td><td>rmeatyard5@twitpic.com</td><td>China</td><td>09/10/1898</td></tr>
+          <tr><td>7</td><td>Bianka</td><td>Spellacy</td><td>bspellacy6@icq.com</td><td>United States</td><td>08/28/1912</td></tr>
+          <tr><td>8</td><td>Dianna</td><td>Jouaneton</td><td>djouaneton7@samsung.com</td><td>Montenegro</td><td>12/04/1915</td></tr>
+          <tr><td>9</td><td>Emlyn</td><td>Preator</td><td>epreator8@chicagotribune.com</td><td>Indonesia</td><td>03/13/1954</td></tr>
+          <tr><td>10</td><td>Kellie</td><td>Leipelt</td><td>kleipelt9@columbia.edu</td><td>China</td><td>12/03/1976</td></tr>
+          <tr><td>11</td><td>Trisha</td><td>Giorgioni</td><td>tgiorgionia@cloudflare.com</td><td>Bosnia and Herzegovina</td><td>07/30/1961</td></tr>
+          <tr><td>12</td><td>Lyn</td><td>Gault</td><td>lgaultb@google.es</td><td>Portugal</td><td>03/20/1971</td></tr>
+          <tr><td>13</td><td>Carolan</td><td>Redgrave</td><td>credgravec@twitpic.com</td><td>Argentina</td><td>09/12/1931</td></tr>
+          <tr><td>14</td><td>Adler</td><td>Fasset</td><td>afassetd@sohu.com</td><td>Albania</td><td>05/15/1961</td></tr>
+          <tr><td>15</td><td>Lucretia</td><td>Huxton</td><td>lhuxtone@pen.io</td><td>Colombia</td><td>11/17/1896</td></tr>
+          <tr><td>2.2</td><td>Lyn</td><td>Gault</td><td>lgaultb@google.es</td><td>Portugal</td><td>03/20/1971</td></tr>
+          <tr><td>2.3</td><td>Carolan</td><td>Redgrave</td><td>credgravec@twitpic.com</td><td>Argentina</td><td>09/12/1931</td></tr>
+          <tr><td>7.8</td><td>Adler</td><td>Fasset</td><td>afassetd@sohu.com</td><td>Albania</td><td>05/15/1961</td></tr>
+          <tr><td>1.5</td><td>Lucretia</td><td>Huxton</td><td>lhuxtone@pen.io</td><td>Colombia</td><td>11/17/1896</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+
+    <script>
+      
+      $(document).ready(function() {
+
+        var headers = $('#data-table thead th');
+
+        $(headers[5]).attr('data-tablesort-type', 'date');
+
+
+        $('table').not(".tablesort").addClass('tablesort');
+        // $('')
+
+      });
+
+
+    </script>
+
+
+  </body>
+  </html>
