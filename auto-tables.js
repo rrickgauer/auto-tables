@@ -11,6 +11,7 @@ Date.prototype.valid = function() {
 $(document).ready(function() {
   loadAllTableText(); 
   addEventListeners();
+    $('.tablesort th.tablesort-default').trigger('click');
 });
 
 function addEventListeners() {
@@ -152,8 +153,8 @@ function sortRowsInt(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
     var cellsB = $(b).find('td');
-    var numA  = parseFloat($(cellsA[columnIndex]).text());
-    var numB  = parseFloat($(cellsB[columnIndex]).text());
+        var numA  = parseFloat($(cellsA[columnIndex]).text().trim().replace(' ', '').replace(',', '.'));
+        var numB  = parseFloat($(cellsB[columnIndex]).text().trim().replace(' ', '').replace(',', '.'));
 
     return numA < numB ? -1 : 1;
   });
@@ -168,8 +169,8 @@ function sortRowsIntDesc(rows, columnIndex) {
   var sortedRows = rows.sort(function(a, b) {
     var cellsA = $(a).find('td');
     var cellsB = $(b).find('td');
-    var numA  = parseFloat($(cellsA[columnIndex]).text());
-    var numB  = parseFloat($(cellsB[columnIndex]).text());
+        var numA  = parseFloat($(cellsA[columnIndex]).text().trim().replace(' ', '').replace(',', '.'));
+        var numB  = parseFloat($(cellsB[columnIndex]).text().trim().replace(' ', '').replace(',', '.'));
 
     return numA > numB ? -1 : 1;
   });
@@ -232,11 +233,11 @@ function loadAllTableText() {
 // Load the table text //
 /////////////////////////
 function loadTableText(table) {
-  var cells = $(table).find('tbody td');
+    var cells = $(table).find('tbody td.tablesearch-source');
 
   for (var count = 0; count < cells.length; count++) {
     var cell = cells[count];
-    var upperCaseText = $(cell).text().toUpperCase();
+        var upperCaseText = $(cell).text().trim().toUpperCase();
     $(cell).attr('data-tablesearch-text', upperCaseText);
   }
 }
