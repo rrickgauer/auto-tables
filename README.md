@@ -55,7 +55,7 @@ Before you include the script in your project, **you must include jQuery**.
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 ```
 
-Then, after downloading the [auto-tables.js](https://github.com/rrickgauer/auto-tables/blob/master/auto-tables.js) script, include it in your html file. 
+Then, after downloading the [auto-tables.js](https://github.com/rrickgauer/auto-tables/blob/master/auto-tables.js) script, include it in your html file.
 
 ```html
 <script src="js/auto-tables.js"></script>
@@ -86,24 +86,28 @@ To use the tablesort, add the class `tablesort` to your desired table. And for e
 ```
 
 As of now, the only accepted `data-tablesort-type` types are:
-* **int** - `data-tablesort-type="int"`
+* **int or decimal** - `data-tablesort-type="int"`
 * **string** - `data-tablesort-type="string"`
 * **date** - `data-tablesort-type="date"`
 
 Dates require a further step that you can read about in our [docs](https://www.ryanrickgauer.com/blog/entries.php?entryID=37).
 
+Default sort column can be specified by adding the class name `tablesort-default` to the desired table header.
+
 ### Tablesearch
 
-To use the table search feature, you need to have a `table` and an `input[type="text"]`. 
+To use the table search feature, you need to have a `table` and an `input[type="text"]`.
 
 For the table, add the class `tablesearch-table`.
-
 
 For the text input:
 
 * add the class `tablesearch-input`
 * add the attribute `data-tablesearch-table`
   * set the value to the id or classname of the table you want searched
+
+To limit the columns that are searchable, add the class `tablesearch-source` to each table cell that should be searchable. If no cells are specified, all cells are searchable.
+
 
 #### Example
 
