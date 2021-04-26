@@ -11,6 +11,7 @@ Date.prototype.valid = function() {
 $(document).ready(function() {
   loadAllTableText(); 
   addEventListeners();
+    $('.tablesort th.tablesort-default').trigger('click');
 });
 
 function addEventListeners() {
