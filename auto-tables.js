@@ -233,7 +233,7 @@ function loadAllTableText() {
 // Load the table text //
 /////////////////////////
 function loadTableText(table) {
-  var cells = $(table).find('tbody td');
+    var cells = $(table).find('tbody td.tablesearch-source');
 
   for (var count = 0; count < cells.length; count++) {
     var cell = cells[count];
