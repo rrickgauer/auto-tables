@@ -3,13 +3,13 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-<a href="https://www.ryanrickgauer.com/blog/entries.php?entryID=37">
+<a href="https://blog.ryanrickgauer.com/entries.php?entryID=32">
 <img src="resources/logo.png" alt="Logo">
 </a>
 
 <h3 align="center">Auto Tables</h3>
 <p align="center">My personal JavaScript library for sorting and searching tables.</p>
-<p align="center"><strong><i><a href="https://www.ryanrickgauer.com/blog/entries.php?entryID=37">View Demo</a></i></strong></p>
+<p align="center"><strong><i><a href="https://blog.ryanrickgauer.com/entries.php?entryID=32">View Demo</a></i></strong></p>
 
 
 <details open>
